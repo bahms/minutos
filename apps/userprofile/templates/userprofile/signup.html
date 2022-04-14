@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% block title %}Sign up | {% endblock %}
+
+{% block content %}
+    <section class="hero is-medium is-light is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Sign up</h1> 
+                <h2 class="subtitle">Get a free account and start tracking</h2>
+            </div>
+        </div>
+    </section>
+
+<div class="columns" id="signup-app">
+    <div class="column is-6 is-offset-3">
+        <form action="." class="mt-6" method="post" v-on:submit="validateForm">
+            {% csrf_token %}
+
+            {% if form.errors  %}
+                <div class="notification is-danger">
+                    {{ form.non_fields_errors}}
+
+                    {% for field in form %}
+                        {% if field.errors %} {{ field.label }}: {{field.errors|striptags}}  {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="field">
+                <label class="label">E-mail</label>
+
+                <div class="control">
+                    <input class="input" type="email" id="id_username" name="username" v-model="username">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                
+                <div class="control">
+                    <input class="input" type="password" id="id_password1" name="password1" v-model="password1">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Repeat password</label>
+                
+                <div class="control">
+                    <input class="input" type="password" id="id_password2" name="password2" v-model="password2">
+                </div>
+            </div>
+
+            <ul>
+                <li class="help" v-if="password1.length < 8">The password must have at leat 8 characters</li>
+                <li class="help" v-if="!isNan(password1)">The can not be entirely numbers</li>
+            </ul>
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-success">Sign up</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+

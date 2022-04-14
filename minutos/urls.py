@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.core.views import frontpage, privacy, terms, plans
+from apps.userprofile.views import signup
 
 urlpatterns = [
-    path('', frontpage),
-    path('privacy', privacy, name='titi'),
-    path('terms', privacy, name='terms'),
-    path('plans', plans, name='plans'),
+    path('', frontpage, name='frontpage'),
+    path('privacy/', privacy, name='titi'),
+    path('terms/', privacy, name='terms'),
+    path('plans/', plans, name='plans'),
+
+    path('signup/', signup, name='signup'),
 
     path('admin/', admin.site.urls),
 ]
